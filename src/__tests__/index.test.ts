@@ -1,14 +1,14 @@
 import { Node } from "../Node";
 import type { ObjectItem } from "../types";
 import { Operator } from "../Operator";
-import { Kind as TreeKind } from "../Tree";
 import { generateKey as gk } from "../Utils";
 
 const genName = (p: string, count: number) => `Path: ${p.padEnd(8)}` + `, Node: ${count}`;
+const treeKind = "tree";
 
-describe("addComponent", () => {
+describe("Operator.add / get", () => {
   test(genName(".", 0), () => {
-    const operator = new Operator();
+    const operator = new Operator(treeKind);
     const result: ObjectItem = {
       name: ".",
       children: {},
@@ -16,7 +16,7 @@ describe("addComponent", () => {
     expect(operator.getObject()).toStrictEqual(result);
   });
   test(genName("./a", 1), () => {
-    const operator = new Operator();
+    const operator = new Operator(treeKind);
     const node1 = new Node("node", "b");
     operator.addComponent("./a", node1);
     const result: ObjectItem = {
@@ -30,7 +30,7 @@ describe("addComponent", () => {
     expect(operator.getObject()).toStrictEqual(result);
   });
   test(genName("./a", 2), () => {
-    const operator = new Operator();
+    const operator = new Operator(treeKind);
     const node1 = new Node("node1", "b");
     const node2 = new Node("node2", "c");
     operator.addComponent("./a", node1);
@@ -49,13 +49,13 @@ describe("addComponent", () => {
     expect(operator.getObject()).toStrictEqual(result);
   });
   test(genName("./a/b", 1), () => {
-    const operator = new Operator();
+    const operator = new Operator(treeKind);
     const node1 = new Node("node", "hello");
     operator.addComponent("./a/b", node1);
     const result: ObjectItem = {
       name: ".",
       children: {
-        [gk(TreeKind, "a")]: {
+        [gk(treeKind, "a")]: {
           name: "a",
           children: {
             [gk(node1.kind, "b")]: {
@@ -68,7 +68,7 @@ describe("addComponent", () => {
     expect(operator.getObject()).toStrictEqual(result);
   });
   test(genName("./a/b", 2), () => {
-    const operator = new Operator();
+    const operator = new Operator(treeKind);
     const node1 = new Node("node1", "hello");
     const node2 = new Node("node2", "hello");
     operator.addComponent("./a/b", node1);
@@ -76,7 +76,7 @@ describe("addComponent", () => {
     const result: ObjectItem = {
       name: ".",
       children: {
-        [gk(TreeKind, "a")]: {
+        [gk(treeKind, "a")]: {
           name: "a",
           children: {
             [gk(node1.kind, "b")]: {
@@ -92,16 +92,16 @@ describe("addComponent", () => {
     expect(operator.getObject()).toStrictEqual(result);
   });
   test(genName("./a/b/c", 1), () => {
-    const operator = new Operator();
+    const operator = new Operator(treeKind);
     const node1 = new Node("node", "hello");
     operator.addComponent("./a/b/c", node1);
     const result: ObjectItem = {
       name: ".",
       children: {
-        [gk(TreeKind, "a")]: {
+        [gk(treeKind, "a")]: {
           name: "a",
           children: {
-            [gk(TreeKind, "b")]: {
+            [gk(treeKind, "b")]: {
               name: "b",
               children: {
                 [gk(node1.kind, "c")]: {
@@ -116,7 +116,7 @@ describe("addComponent", () => {
     expect(operator.getObject()).toStrictEqual(result);
   });
   test(genName("./a/b/c", 3), () => {
-    const operator = new Operator();
+    const operator = new Operator(treeKind);
     const node_a1 = new Node("node-A", "hello");
     const node_ab2 = new Node("node-B", "world");
     const node_abc3 = new Node("node-C", "!");
@@ -129,13 +129,13 @@ describe("addComponent", () => {
         [gk(node_a1.kind, "a")]: {
           name: node_a1.name,
         },
-        [gk(TreeKind, "a")]: {
+        [gk(treeKind, "a")]: {
           name: "a",
           children: {
             [gk(node_ab2.kind, "b")]: {
               name: node_ab2.name,
             },
-            [gk(TreeKind, "b")]: {
+            [gk(treeKind, "b")]: {
               name: "b",
               children: {
                 [gk(node_abc3.kind, "c")]: {

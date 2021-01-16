@@ -1,14 +1,11 @@
 import type { Component, Children, ObjectItem } from "./types";
 import { generateKey } from "./Utils";
 
-export const Kind = "tree" as const;
-
 export class Tree implements Component {
-  public kind = Kind;
   public key: string;
   private children: Children = {};
-  constructor(public name: string) {
-    this.key = generateKey(this.kind, name);
+  constructor(public kind: string, public name: string) {
+    this.key = generateKey(kind, name);
   }
 
   public getChildByPaths(kind: string, paths: string[]): Component | undefined {
