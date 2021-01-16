@@ -1,20 +1,21 @@
 {
-  "name": "@himenon/node-lib-template",
-  "version": "0.0.9",
+  "name": "@himenon/path-oriented-structure",
+  "version": "0.0.0",
   "private": true,
-  "description": "node library template",
+  "description": "A structure that is a Path-oriented extension of Composite Pattern.",
   "keywords": [
-    "template",
-    "proxy directory",
-    "typescript"
+    "path-oriented",
+    "structure",
+    "composite-pattern",
+    "design-pattern"
   ],
-  "homepage": "https://github.com/Himenon/node-lib-template#readme",
+  "homepage": "https://github.com/Himenon/path-oriented-structure#readme",
   "bugs": {
-    "url": "https://github.com/Himenon/node-lib-template/issues"
+    "url": "https://github.com/Himenon/path-oriented-structure/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:Himenon/node-lib-template.git"
+    "url": "git@github.com:Himenon/path-oriented-structure.git"
   },
   "license": "MIT",
   "author": {
