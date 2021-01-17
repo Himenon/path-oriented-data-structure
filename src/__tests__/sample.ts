@@ -27,6 +27,6 @@ export class NumberValueNode extends Node<KindOfNumber> {
 
 export type GetNode<T extends Kind> = T extends KindOfString ? StringValueNode : T extends KindOfNumber ? NumberValueNode : never;
 
-export const createFindComponent = (operator: Operator<string>) => <T extends Kind>(kind: T, path: string): GetNode<T> | undefined => {
-  return operator.getComponent(kind, path) as GetNode<T> | undefined;
+export const getChildByPaths = (operator: Operator<string>) => <T extends Kind>(kind: T, path: string): GetNode<T> | undefined => {
+  return operator.getChildByPaths(kind, path) as GetNode<T> | undefined;
 };

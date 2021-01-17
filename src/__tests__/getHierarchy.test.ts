@@ -1,23 +1,23 @@
 import { Node } from "../Node";
 import type { HierarchicalData } from "../types";
 import { Operator } from "../Operator";
-import { genName } from "./tools";
+import { genTestName } from "./tools";
 import { generateKey as gk } from "../Utils";
 import { treeKind } from "./sample";
 
-describe("Operator.add / get", () => {
-  test(genName(".", 0), () => {
+describe("Hierarchical data management", () => {
+  test(genTestName(".", 0), () => {
     const operator = new Operator(treeKind);
     const result: HierarchicalData = {
       name: ".",
       children: {},
     };
-    expect(operator.getObject()).toStrictEqual(result);
+    expect(operator.getHierarchy()).toStrictEqual(result);
   });
-  test(genName("./a", 1), () => {
+  test(genTestName("./a", 1), () => {
     const operator = new Operator(treeKind);
     const node1 = new Node("node", "b");
-    operator.addComponent("./a", node1);
+    operator.set("./a", node1);
     const result: HierarchicalData = {
       name: ".",
       children: {
@@ -26,14 +26,14 @@ describe("Operator.add / get", () => {
         },
       },
     };
-    expect(operator.getObject()).toStrictEqual(result);
+    expect(operator.getHierarchy()).toStrictEqual(result);
   });
-  test(genName("./a", 2), () => {
+  test(genTestName("./a", 2), () => {
     const operator = new Operator(treeKind);
     const node1 = new Node("node1", "b");
     const node2 = new Node("node2", "c");
-    operator.addComponent("./a", node1);
-    operator.addComponent("./a", node2);
+    operator.set("./a", node1);
+    operator.set("./a", node2);
     const result: HierarchicalData = {
       name: ".",
       children: {
@@ -45,12 +45,12 @@ describe("Operator.add / get", () => {
         },
       },
     };
-    expect(operator.getObject()).toStrictEqual(result);
+    expect(operator.getHierarchy()).toStrictEqual(result);
   });
-  test(genName("./a/b", 1), () => {
+  test(genTestName("./a/b", 1), () => {
     const operator = new Operator(treeKind);
     const node1 = new Node("node", "hello");
-    operator.addComponent("./a/b", node1);
+    operator.set("./a/b", node1);
     const result: HierarchicalData = {
       name: ".",
       children: {
@@ -64,14 +64,14 @@ describe("Operator.add / get", () => {
         },
       },
     };
-    expect(operator.getObject()).toStrictEqual(result);
+    expect(operator.getHierarchy()).toStrictEqual(result);
   });
-  test(genName("./a/b", 2), () => {
+  test(genTestName("./a/b", 2), () => {
     const operator = new Operator(treeKind);
     const node1 = new Node("node1", "hello");
     const node2 = new Node("node2", "hello");
-    operator.addComponent("./a/b", node1);
-    operator.addComponent("./a/b", node2);
+    operator.set("./a/b", node1);
+    operator.set("./a/b", node2);
     const result: HierarchicalData = {
       name: ".",
       children: {
@@ -88,12 +88,12 @@ describe("Operator.add / get", () => {
         },
       },
     };
-    expect(operator.getObject()).toStrictEqual(result);
+    expect(operator.getHierarchy()).toStrictEqual(result);
   });
-  test(genName("./a/b/c", 1), () => {
+  test(genTestName("./a/b/c", 1), () => {
     const operator = new Operator(treeKind);
     const node1 = new Node("node", "hello");
-    operator.addComponent("./a/b/c", node1);
+    operator.set("./a/b/c", node1);
     const result: HierarchicalData = {
       name: ".",
       children: {
@@ -112,16 +112,16 @@ describe("Operator.add / get", () => {
         },
       },
     };
-    expect(operator.getObject()).toStrictEqual(result);
+    expect(operator.getHierarchy()).toStrictEqual(result);
   });
-  test(genName("./a/b/c", 3), () => {
+  test(genTestName("./a/b/c", 3), () => {
     const operator = new Operator(treeKind);
     const node_a1 = new Node("node-A", "hello");
     const node_ab2 = new Node("node-B", "world");
     const node_abc3 = new Node("node-C", "!");
-    operator.addComponent("./a", node_a1);
-    operator.addComponent("./a/b", node_ab2);
-    operator.addComponent("./a/b/c", node_abc3);
+    operator.set("./a", node_a1);
+    operator.set("./a/b", node_ab2);
+    operator.set("./a/b/c", node_abc3);
     const result: HierarchicalData = {
       name: ".",
       children: {
@@ -146,6 +146,6 @@ describe("Operator.add / get", () => {
         },
       },
     };
-    expect(operator.getObject()).toStrictEqual(result);
+    expect(operator.getHierarchy()).toStrictEqual(result);
   });
 });
