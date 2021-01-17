@@ -11,13 +11,17 @@ export class Node<Kind extends string> implements Component<Kind> {
     return undefined;
   }
 
+  public hasChildren(): boolean {
+    return false;
+  }
+
   public getHierarchy(): HierarchicalData {
     return {
       name: this.name,
     };
   }
 
-  public getChildByPaths(kind: string, paths: string[]): Component | undefined {
+  public getChildByPaths(paths: string[], kind: string): Component | undefined {
     const [name] = paths;
     const key = generateKey(kind, name);
     if (this.key === key) {

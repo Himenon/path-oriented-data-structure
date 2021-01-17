@@ -3,7 +3,7 @@ import { Operator } from "../Operator";
 import { treeKind, StringValueNode, getChildByPaths } from "./sample";
 import { genTestName } from "./tools";
 
-describe("Extended Node management test", () => {
+describe("Operator.add / get", () => {
   test(genTestName(".", 0), () => {
     const operator = new Operator(treeKind);
     const result: HierarchicalData = {

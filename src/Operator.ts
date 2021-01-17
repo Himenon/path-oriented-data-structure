@@ -8,16 +8,26 @@ export class Operator<TreeKind extends string> {
     this.tree = new Tree(treeKind, ".");
   }
 
-  private setToRootOrParent(component: Component, currentPath: string, previousPathArray: string[], nextPathArray: string[]): void {
-    const childComponent = this.tree.getChildByPaths(component.kind, nextPathArray);
+  private setToRootOrParent(component: Component, currentPathName: string, previousPathArray: string[], nextPathArray: string[]): void {
+    const childComponent = this.tree.getChildByPaths(nextPathArray, component.kind);
     if (childComponent || nextPathArray.length === 0) {
       return;
     }
     if (previousPathArray.length === 0 && nextPathArray.length === 1) {
       this.tree.set(nextPathArray[0], component);
     } else {
-      const parentComponent = this.tree.getChildByPaths(this.treeKind, previousPathArray);
-      parentComponent && parentComponent.set(currentPath, component);
+      const parentComponent = this.tree.getChildByPaths(previousPathArray, this.treeKind);
+      parentComponent && parentComponent.set(currentPathName, component);
+    }
+  }
+
+  private removeFromRootOrParent(currentPathArray: string[], component: Component): void {
+    const previousPathArray: string[] = currentPathArray.slice(0, currentPathArray.length - 1);
+    if (previousPathArray.length === 0 && currentPathArray.length === 1) {
+      this.tree.remove(component);
+    } else {
+      const parentComponent = this.tree.getChildByPaths(previousPathArray, this.treeKind);
+      parentComponent && parentComponent.remove(component);
     }
   }
 
@@ -25,9 +35,9 @@ export class Operator<TreeKind extends string> {
     return this.tree.getHierarchy();
   }
 
-  public getChildByPaths(kind: string, path: string): Component | undefined {
+  public getChildByPaths(path: string, kind: string): Component | undefined {
     const pathArray = split(path, this.delimiter);
-    return this.tree.getChildByPaths(kind, pathArray);
+    return this.tree.getChildByPaths(pathArray, kind);
   }
 
   public set(path: string, component: Component): void {
@@ -43,5 +53,20 @@ export class Operator<TreeKind extends string> {
       }
       return nextPathArray;
     }, []);
+  }
+
+  public remove(path: string, kind: string): void {
+    const pathArray = split(path, this.delimiter);
+    const pathArrayLength = pathArray.length;
+    for (let i = 0; i <= pathArrayLength; i++) {
+      const currentPathArray = pathArray.slice(0, pathArrayLength - i);
+      if (i === 0) {
+        const component = this.tree.getChildByPaths(currentPathArray, kind);
+        component && this.removeFromRootOrParent(currentPathArray, component);
+      } else {
+        const component = this.tree.getChildByPaths(currentPathArray, this.treeKind);
+        component && component.hasChildren() && this.removeFromRootOrParent(currentPathArray, component);
+      }
+    }
   }
 }

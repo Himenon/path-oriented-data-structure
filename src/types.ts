@@ -11,7 +11,8 @@ export interface Component<Kind = string> {
   /** Tree or Node name. */
   name: string;
   getChildren: () => Children | undefined;
-  getChildByPaths: (kind: string, paths: string[]) => Component | undefined;
+  hasChildren: () => boolean;
+  getChildByPaths: (paths: string[], kind: string) => Component | undefined;
   getHierarchy: () => HierarchicalData;
   set: (pathName: string, component: Component) => void;
   remove: (component: Component) => void;

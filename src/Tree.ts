@@ -5,17 +5,17 @@ export class Tree<Kind extends string> implements Component<Kind> {
   private children: Children = {};
   constructor(public kind: Kind, public name: string) {}
 
-  public getChildByPaths(kind: string, paths: string[]): Component<string> | undefined {
+  public getChildByPaths(paths: string[], kind: string): Component<string> | undefined {
     const [name, ...pathArray] = paths;
-    const key = generateKey(kind, name);
-    const component = this.children[key];
-    if (!component) {
-      return undefined;
+    if (!name) {
+      return;
     }
     if (pathArray.length === 0) {
+      const component = this.children[generateKey(kind, name)];
       return component;
     }
-    return component.getChildByPaths(kind, pathArray);
+    const childTree = this.children[generateKey(this.kind, name)];
+    return childTree && childTree.getChildByPaths(pathArray, kind);
   }
 
   public getHierarchy(): HierarchicalData {
@@ -30,6 +30,10 @@ export class Tree<Kind extends string> implements Component<Kind> {
 
   public getChildren(): Children {
     return this.children;
+  }
+
+  public hasChildren(): boolean {
+    return Object.keys(this.children).length === 0;
   }
 
   public set(pathName: string, component: Component): void {
