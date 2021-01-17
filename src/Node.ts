@@ -1,11 +1,7 @@
 import type { Component, HierarchicalData } from "./types";
-import { generateKey } from "./Utils";
 
 export class Node<Kind extends string> implements Component<Kind> {
-  private key: string;
-  constructor(public kind: Kind, public name: string) {
-    this.key = generateKey(kind, name);
-  }
+  constructor(public kind: Kind, public name: string) {}
 
   public getChildren(): undefined {
     return undefined;
@@ -21,12 +17,7 @@ export class Node<Kind extends string> implements Component<Kind> {
     };
   }
 
-  public getChildByPaths(paths: string[], kind: string): Component | undefined {
-    const [name] = paths;
-    const key = generateKey(kind, name);
-    if (this.key === key) {
-      return this;
-    }
+  public getChildByPaths(): undefined {
     return undefined;
   }
 

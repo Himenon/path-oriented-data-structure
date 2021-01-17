@@ -46,4 +46,26 @@ describe("copy & move", () => {
     expect(success).toBeTruthy();
     expect(operator.getHierarchy()).toStrictEqual(hierarchicalData);
   });
+  test("move", () => {
+    const operator = new Operator(treeKind);
+    (() => {
+      operator.set("./a", new StringValueNode("string-name-1", "test-data-1"));
+      operator.set("./b", new StringValueNode("string-name-2", "test-data-2"));
+    })();
+
+    const hierarchicalData: HierarchicalData = {
+      name: ".",
+      children: {
+        [gk("string", "a")]: {
+          name: "string-name-1",
+        },
+        [gk("string", "b")]: {
+          name: "string-name-2",
+        },
+      },
+    };
+    const success = operator.move("./a", "./b", "string");
+    expect(success).toBeFalsy();
+    expect(operator.getHierarchy()).toStrictEqual(hierarchicalData);
+  });
 });
