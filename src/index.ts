@@ -1,6 +1,6 @@
-export * as Node from "./Node";
-export * as Operator from "./Operator";
-export * as Tree from "./Tree";
+export { Node } from "./Node";
+export { Operator } from "./Operator";
+export { Tree } from "./Tree";
 export * as Utils from "./Utils";
 import type { HierarchicalData, Component, Children } from "./types";
 export { HierarchicalData, Component, Children };
