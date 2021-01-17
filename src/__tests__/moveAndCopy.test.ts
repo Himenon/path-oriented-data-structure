@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type { HierarchicalData } from "../types";
 import { Operator } from "../Operator";
-import { treeKind, StringValueNode } from "./sample";
+import { treeKind, NumberValueNode, StringValueNode } from "./sample";
 import { generateKey as gk } from "../Utils";
 
 describe("copy & move", () => {
@@ -46,7 +46,8 @@ describe("copy & move", () => {
     expect(success).toBeTruthy();
     expect(operator.getHierarchy()).toStrictEqual(hierarchicalData);
   });
-  test("move", () => {
+
+  test("move failed test", () => {
     const operator = new Operator(treeKind);
     (() => {
       operator.set("./a", new StringValueNode("string-name-1", "test-data-1"));
@@ -66,6 +67,29 @@ describe("copy & move", () => {
     };
     const success = operator.move("./a", "./b", "string");
     expect(success).toBeFalsy();
+    expect(operator.getHierarchy()).toStrictEqual(hierarchicalData);
+  });
+
+  test("multi type move", () => {
+    const operator = new Operator(treeKind);
+    (() => {
+      operator.set("./a", new StringValueNode("string-type", "test-data-1"));
+      operator.set("./b", new NumberValueNode("number-type", 100));
+    })();
+
+    const hierarchicalData: HierarchicalData = {
+      name: ".",
+      children: {
+        [gk("string", "b")]: {
+          name: "string-type",
+        },
+        [gk("number", "b")]: {
+          name: "number-type",
+        },
+      },
+    };
+    const success = operator.move("./a", "./b", "string");
+    expect(success).toBeTruthy();
     expect(operator.getHierarchy()).toStrictEqual(hierarchicalData);
   });
 });
