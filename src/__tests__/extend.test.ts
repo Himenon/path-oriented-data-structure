@@ -1,4 +1,4 @@
-import type { ObjectItem } from "../types";
+import type { HierarchicalData } from "../types";
 import { Operator } from "../Operator";
 import { treeKind, StringValueNode, createFindComponent } from "./sample";
 import { genName } from "./tools";
@@ -6,7 +6,7 @@ import { genName } from "./tools";
 describe("Operator.add / get", () => {
   test(genName(".", 0), () => {
     const operator = new Operator(treeKind);
-    const result: ObjectItem = {
+    const result: HierarchicalData = {
       name: ".",
       children: {},
     };

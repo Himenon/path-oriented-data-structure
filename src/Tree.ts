@@ -1,12 +1,9 @@
-import type { Component, Children, ObjectItem } from "./types";
+import type { Component, Children, HierarchicalData } from "./types";
 import { generateKey } from "./Utils";
 
 export class Tree<Kind extends string> implements Component<Kind> {
-  public key: string;
   private children: Children = {};
-  constructor(public kind: Kind, public name: string) {
-    this.key = generateKey(kind, name);
-  }
+  constructor(public kind: Kind, public name: string) {}
 
   public getChildByPaths(kind: string, paths: string[]): Component<string> | undefined {
     const [name, ...pathArray] = paths;
@@ -21,9 +18,9 @@ export class Tree<Kind extends string> implements Component<Kind> {
     return component.getChildByPaths(kind, pathArray);
   }
 
-  public getObject(): ObjectItem {
+  public getHierarchy(): HierarchicalData {
     const entires = Object.entries(this.children).map(([key, child]) => {
-      return [key, child.getObject()];
+      return [key, child.getHierarchy()];
     });
     return {
       name: this.name,
@@ -31,24 +28,23 @@ export class Tree<Kind extends string> implements Component<Kind> {
     };
   }
 
-  public getChildren(): Component<string>[] {
-    return Object.values(this.children);
+  public getChildren(): Children {
+    return this.children;
   }
 
-  public addComponent(pathName: string, component: Component): void {
-    // console.log(`Tree:AddComponent: ${component.name}`);
+  public set(pathName: string, component: Component): void {
     const key = generateKey(component.kind, pathName);
     this.children[key] = component;
   }
 
-  public removeComponent(component: Component<string>): void {
+  public remove(component: Component<string>): void {
     const entries = Object.entries(this.children).filter(([, item]) => {
-      return !component.sameComponent(item);
+      return !component.isSameComponent(item);
     });
     this.children = Object.fromEntries(entries);
   }
 
-  public sameComponent(component: Component<string>): boolean {
-    return this.name === component.name && this.kind === component.kind;
+  public isSameComponent(component: Component<string>): boolean {
+    return !!component.getChildren() && this.kind === component.kind && this.name === component.name;
   }
 }

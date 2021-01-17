@@ -1,8 +1,8 @@
-import type { Component, ObjectItem } from "./types";
+import type { Component, HierarchicalData } from "./types";
 import { generateKey } from "./Utils";
 
 export class Node<Kind extends string> implements Component<Kind> {
-  public key: string;
+  private key: string;
   constructor(public kind: Kind, public name: string) {
     this.key = generateKey(kind, name);
   }
@@ -11,7 +11,7 @@ export class Node<Kind extends string> implements Component<Kind> {
     return undefined;
   }
 
-  public getObject(): ObjectItem {
+  public getHierarchy(): HierarchicalData {
     return {
       name: this.name,
     };
@@ -26,15 +26,15 @@ export class Node<Kind extends string> implements Component<Kind> {
     return undefined;
   }
 
-  public addComponent(): void {
+  public set(): void {
     return;
   }
 
-  public removeComponent(): void {
+  public remove(): void {
     return;
   }
 
-  public sameComponent(component: Component<string>): boolean {
-    return this.name === component.name && this.kind === component.kind;
+  public isSameComponent(component: Component<string>): boolean {
+    return !component.getChildren() && this.kind === component.kind && this.name === component.name;
   }
 }

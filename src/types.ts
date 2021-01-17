@@ -1,20 +1,21 @@
-export interface ObjectItem {
+export interface HierarchicalData {
   name: string;
   children?: {
-    [key: string]: ObjectItem;
+    [key: string]: HierarchicalData;
   };
 }
 
 export interface Component<Kind = string> {
+  /** Tree or Node kinds. */
   kind: Kind;
+  /** Tree or Node name. */
   name: string;
-  key: string;
+  getChildren: () => Children | undefined;
   getChildByPaths: (kind: string, paths: string[]) => Component | undefined;
-  sameComponent: (component: Component) => boolean;
-  addComponent: (pathName: string, component: Component) => void;
-  removeComponent: (component: Component) => void;
-  getChildren: () => Component[] | undefined;
-  getObject: () => ObjectItem;
+  getHierarchy: () => HierarchicalData;
+  set: (pathName: string, component: Component) => void;
+  remove: (component: Component) => void;
+  isSameComponent: (component: Component) => boolean;
 }
 
 export interface Children {

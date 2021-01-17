@@ -1,4 +1,4 @@
-import type { Component, ObjectItem } from "./types";
+import type { Component, HierarchicalData } from "./types";
 import { Tree } from "./Tree";
 import { split } from "./Utils";
 
@@ -8,8 +8,8 @@ export class Operator<TreeKind extends string> {
     this.rootTree = new Tree(treeKind, ".");
   }
 
-  public getObject(): ObjectItem {
-    return this.rootTree.getObject();
+  public getObject(): HierarchicalData {
+    return this.rootTree.getHierarchy();
   }
 
   public getComponent(kind: string, path: string): Component | undefined {
@@ -23,10 +23,10 @@ export class Operator<TreeKind extends string> {
       return;
     }
     if (previousPathArray.length === 0 && nextPathArray.length === 1) {
-      this.rootTree.addComponent(nextPathArray[0], component);
+      this.rootTree.set(nextPathArray[0], component);
     } else {
       const parentComponent = this.rootTree.getChildByPaths(this.treeKind, previousPathArray);
-      parentComponent && parentComponent.addComponent(currentPath, component);
+      parentComponent && parentComponent.set(currentPath, component);
     }
   }
 
