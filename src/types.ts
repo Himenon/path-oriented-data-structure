@@ -15,8 +15,7 @@ export interface Component<Kind = string> {
   getChildByPaths: (paths: string[], kind: string) => Component | undefined;
   getHierarchy: () => HierarchicalData;
   set: (pathName: string, component: Component) => void;
-  remove: (component: Component) => void;
-  isSameComponent: (component: Component) => boolean;
+  remove: (pathName: string, component: Component) => void;
 }
 
 export interface Children {

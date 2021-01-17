@@ -41,14 +41,11 @@ export class Tree<Kind extends string> implements Component<Kind> {
     this.children[key] = component;
   }
 
-  public remove(component: Component<string>): void {
-    const entries = Object.entries(this.children).filter(([, item]) => {
-      return !component.isSameComponent(item);
+  public remove(pathName: string, component: Component<string>): void {
+    const targetKey = generateKey(component.kind, pathName);
+    const entries = Object.entries(this.children).filter(([key]) => {
+      return targetKey !== key;
     });
     this.children = Object.fromEntries(entries);
-  }
-
-  public isSameComponent(component: Component<string>): boolean {
-    return !!component.getChildren() && this.kind === component.kind && this.name === component.name;
   }
 }

@@ -37,8 +37,4 @@ export class Node<Kind extends string> implements Component<Kind> {
   public remove(): void {
     return;
   }
-
-  public isSameComponent(component: Component<string>): boolean {
-    return !component.getChildren() && this.kind === component.kind && this.name === component.name;
-  }
 }

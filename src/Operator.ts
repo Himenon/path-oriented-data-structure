@@ -21,13 +21,13 @@ export class Operator<TreeKind extends string> {
     }
   }
 
-  private removeFromRootOrParent(currentPathArray: string[], component: Component): void {
+  private removeFromRootOrParent(currentPathName: string, currentPathArray: string[], component: Component): void {
     const previousPathArray: string[] = currentPathArray.slice(0, currentPathArray.length - 1);
     if (previousPathArray.length === 0 && currentPathArray.length === 1) {
-      this.tree.remove(component);
+      this.tree.remove(currentPathName, component);
     } else {
       const parentComponent = this.tree.getChildByPaths(previousPathArray, this.treeKind);
-      parentComponent && parentComponent.remove(component);
+      parentComponent && parentComponent.remove(currentPathName, component);
     }
   }
 
@@ -47,17 +47,9 @@ export class Operator<TreeKind extends string> {
       const nextPathArray = previousPathArray.concat(currentPathName);
       const isLastIndex = currentIndex === pathArrayLength - 1;
       if (isLastIndex) {
-        console.log({
-          isLastIndex,
-          currentPathName,
-        });
         this.setToRootOrParent(component, currentPathName, previousPathArray, nextPathArray);
       } else {
         const tree = new Tree(this.treeKind, currentPathName);
-        console.log({
-          isLastIndex,
-          currentPathName,
-        });
         this.setToRootOrParent(tree, currentPathName, previousPathArray, nextPathArray);
       }
       return nextPathArray;
@@ -69,12 +61,16 @@ export class Operator<TreeKind extends string> {
     const pathArrayLength = pathArray.length;
     for (let i = 0; i <= pathArrayLength; i++) {
       const currentPathArray = pathArray.slice(0, pathArrayLength - i);
+      const currentPathName = pathArray[pathArrayLength - i - 1];
+      if (!currentPathName) {
+        continue;
+      }
       if (i === 0) {
         const component = this.tree.getChildByPaths(currentPathArray, kind);
-        component && this.removeFromRootOrParent(currentPathArray, component);
+        component && this.removeFromRootOrParent(currentPathName, currentPathArray, component);
       } else {
         const component = this.tree.getChildByPaths(currentPathArray, this.treeKind);
-        component && component.hasChildren() && this.removeFromRootOrParent(currentPathArray, component);
+        component && component.hasChildren() && this.removeFromRootOrParent(currentPathName, currentPathArray, component);
       }
     }
   }

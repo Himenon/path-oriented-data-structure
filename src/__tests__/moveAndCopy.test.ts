@@ -5,7 +5,7 @@ import { treeKind, StringValueNode } from "./sample";
 import { generateKey as gk } from "../Utils";
 
 describe("copy & move", () => {
-  test.skip("copy", () => {
+  test("copy", () => {
     const operator = new Operator(treeKind);
     (() => {
       const valueNode = new StringValueNode("string-name", "test-data-1");
