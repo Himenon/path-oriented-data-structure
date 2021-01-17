@@ -33,4 +33,47 @@ describe("Remove Component using path", () => {
     operator.remove("./a/b", node1.kind);
     expect(operator.getHierarchy()).toStrictEqual(emptyResult);
   });
+  test(genTestName("./a/b/c", 1), () => {
+    const operator = new Operator(treeKind);
+    const node1 = new Node("node", "hello");
+    operator.set("./a/b/c", node1);
+    operator.remove("./a/b/c", node1.kind);
+    expect(operator.getHierarchy()).toStrictEqual(emptyResult);
+  });
+  test(genTestName("./a/b/c", 2), () => {
+    const operator = new Operator(treeKind);
+    const node1 = new Node("node1", "hello");
+    const node2 = new Node("node2", "world");
+    const partialResult1: HierarchicalData = {
+      name: ".",
+      children: {
+        "tree:a": {
+          name: "a",
+          children: {
+            "tree:b": {
+              name: "b",
+              children: {
+                "node2:c": {
+                  name: node2.name,
+                },
+              },
+            },
+          },
+        },
+      },
+    };
+
+    const partialResult2: HierarchicalData = { name: ".", children: { "tree:a": { name: "a", children: { "node1:b": { name: "hello" } } } } };
+    operator.set("./a/b", node1);
+    operator.set("./a/b/c", node2);
+    operator.remove("./a/b", node1.kind);
+    expect(operator.getHierarchy()).toStrictEqual(partialResult1);
+
+    operator.set("./a/b", node1);
+    operator.remove("./a/b/c", node2.kind);
+    expect(operator.getHierarchy()).toStrictEqual(partialResult2);
+
+    operator.remove("./a/b", node1.kind);
+    expect(operator.getHierarchy()).toStrictEqual(emptyResult);
+  });
 });
