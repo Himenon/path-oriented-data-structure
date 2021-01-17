@@ -2,9 +2,9 @@ import type { Component, ObjectItem } from "./types";
 import { Tree } from "./Tree";
 import { split } from "./Utils";
 
-export class Operator {
-  private rootTree: Tree;
-  constructor(private treeKind: string, private delimiter: string = "/") {
+export class Operator<TreeKind extends string> {
+  private rootTree: Tree<TreeKind>;
+  constructor(private treeKind: TreeKind, private delimiter: string = "/") {
     this.rootTree = new Tree(treeKind, ".");
   }
 
@@ -17,7 +17,7 @@ export class Operator {
     return this.rootTree.getChildByPaths(kind, pathArray);
   }
 
-  private add(component: Component, currentPath: string, previousPathArray: string[], nextPathArray: string[]) {
+  private createOrAddComponent(component: Component, currentPath: string, previousPathArray: string[], nextPathArray: string[]) {
     const childComponent = this.rootTree.getChildByPaths(component.kind, nextPathArray);
     if (childComponent || nextPathArray.length === 0) {
       return;
@@ -37,9 +37,9 @@ export class Operator {
       const nextPathArray = previousPathArray.concat(currentPath);
       const isLastIndex = currentIndex === pathArrayLength - 1;
       if (isLastIndex) {
-        this.add(component, currentPath, previousPathArray, nextPathArray);
+        this.createOrAddComponent(component, currentPath, previousPathArray, nextPathArray);
       } else {
-        this.add(new Tree(this.treeKind, currentPath), currentPath, previousPathArray, nextPathArray);
+        this.createOrAddComponent(new Tree(this.treeKind, currentPath), currentPath, previousPathArray, nextPathArray);
       }
       return nextPathArray;
     }, []);

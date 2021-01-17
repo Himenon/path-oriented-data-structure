@@ -1,21 +1,21 @@
 {
-  "name": "@himenon/path-oriented-structure",
+  "name": "@himenon/path-oriented-data-structure",
   "version": "0.0.0",
   "private": true,
-  "description": "A structure that is a Path-oriented extension of Composite Pattern.",
+  "description": "A composite pattern with a Path-oriented data structure.",
   "keywords": [
     "path-oriented",
     "structure",
     "composite-pattern",
     "design-pattern"
   ],
-  "homepage": "https://github.com/Himenon/path-oriented-structure#readme",
+  "homepage": "https://github.com/Himenon/path-oriented-data-structure#readme",
   "bugs": {
-    "url": "https://github.com/Himenon/path-oriented-structure/issues"
+    "url": "https://github.com/Himenon/path-oriented-data-structure/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:Himenon/path-oriented-structure.git"
+    "url": "git@github.com:Himenon/path-oriented-data-structure.git"
   },
   "license": "MIT",
   "author": {

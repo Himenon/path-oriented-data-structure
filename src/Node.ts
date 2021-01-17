@@ -1,9 +1,9 @@
 import type { Component, ObjectItem } from "./types";
 import { generateKey } from "./Utils";
 
-export class Node implements Component {
+export class Node<Kind extends string> implements Component<Kind> {
   public key: string;
-  constructor(public kind: string, public name: string) {
+  constructor(public kind: Kind, public name: string) {
     this.key = generateKey(kind, name);
   }
 
@@ -34,7 +34,7 @@ export class Node implements Component {
     return;
   }
 
-  public sameComponent(component: Component): boolean {
+  public sameComponent(component: Component<string>): boolean {
     return this.name === component.name && this.kind === component.kind;
   }
 }

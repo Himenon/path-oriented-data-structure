@@ -1,10 +1,9 @@
 import { Node } from "../Node";
 import type { ObjectItem } from "../types";
 import { Operator } from "../Operator";
+import { genName } from "./tools";
 import { generateKey as gk } from "../Utils";
-
-const genName = (p: string, count: number) => `Path: ${p.padEnd(8)}` + `, Node: ${count}`;
-const treeKind = "tree";
+import { treeKind } from "./sample";
 
 describe("Operator.add / get", () => {
   test(genName(".", 0), () => {

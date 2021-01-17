@@ -1,14 +1,14 @@
 import type { Component, Children, ObjectItem } from "./types";
 import { generateKey } from "./Utils";
 
-export class Tree implements Component {
+export class Tree<Kind extends string> implements Component<Kind> {
   public key: string;
   private children: Children = {};
-  constructor(public kind: string, public name: string) {
+  constructor(public kind: Kind, public name: string) {
     this.key = generateKey(kind, name);
   }
 
-  public getChildByPaths(kind: string, paths: string[]): Component | undefined {
+  public getChildByPaths(kind: string, paths: string[]): Component<string> | undefined {
     const [name, ...pathArray] = paths;
     const key = generateKey(kind, name);
     const component = this.children[key];
@@ -31,7 +31,7 @@ export class Tree implements Component {
     };
   }
 
-  public getChildren(): Component[] {
+  public getChildren(): Component<string>[] {
     return Object.values(this.children);
   }
 
@@ -41,14 +41,14 @@ export class Tree implements Component {
     this.children[key] = component;
   }
 
-  public removeComponent(component: Component): void {
+  public removeComponent(component: Component<string>): void {
     const entries = Object.entries(this.children).filter(([, item]) => {
       return !component.sameComponent(item);
     });
     this.children = Object.fromEntries(entries);
   }
 
-  public sameComponent(component: Component): boolean {
+  public sameComponent(component: Component<string>): boolean {
     return this.name === component.name && this.kind === component.kind;
   }
 }

@@ -5,8 +5,8 @@ export interface ObjectItem {
   };
 }
 
-export interface Component {
-  kind: string;
+export interface Component<Kind = string> {
+  kind: Kind;
   name: string;
   key: string;
   getChildByPaths: (kind: string, paths: string[]) => Component | undefined;
