@@ -8,16 +8,19 @@ export type KindOfNumber = "number";
 export type Kind = KindOfNumber | KindOfString;
 
 export class StringValueNode extends Node<KindOfString> {
-  constructor(private value: string, name: string) {
+  constructor(name: string, private value: string) {
     super("string", name);
   }
   public getValue(): string {
     return this.value;
   }
+  public setValue(value: string): void {
+    this.value = value;
+  }
 }
 
 export class NumberValueNode extends Node<KindOfNumber> {
-  constructor(private value: number, name: string) {
+  constructor(name: string, private value: number) {
     super("number", name);
   }
   public getValue(): number {

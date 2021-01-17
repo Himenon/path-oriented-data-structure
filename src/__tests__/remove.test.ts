@@ -40,6 +40,7 @@ describe("Remove Component using path", () => {
     operator.remove("./a/b/c", node1.kind);
     expect(operator.getHierarchy()).toStrictEqual(emptyResult);
   });
+
   test(genTestName("./a/b/c", 2), () => {
     const operator = new Operator(treeKind);
     const node1 = new Node("node1", "hello");
@@ -75,5 +76,18 @@ describe("Remove Component using path", () => {
 
     operator.remove("./a/b", node1.kind);
     expect(operator.getHierarchy()).toStrictEqual(emptyResult);
+  });
+
+  test(genTestName("./a,./b,./c", 3), () => {
+    const operator = new Operator(treeKind);
+    const node1 = new Node("node1", "hello");
+    const node2 = new Node("node1", "world");
+    const node3 = new Node("node1", "!");
+    operator.set("./a", node1);
+    operator.set("./b", node2);
+    operator.set("./c", node3);
+    operator.remove("./a", node1.kind);
+    const data: HierarchicalData = { children: { "node1:b": { name: "world" }, "node1:c": { name: "!" } }, name: "." };
+    expect(operator.getHierarchy()).toStrictEqual(data);
   });
 });

@@ -43,13 +43,22 @@ export class Operator<TreeKind extends string> {
   public set(path: string, component: Component): void {
     const pathArray = split(path, this.delimiter);
     const pathArrayLength = pathArray.length;
-    pathArray.reduce<string[]>((previousPathArray, currentPath, currentIndex) => {
-      const nextPathArray = previousPathArray.concat(currentPath);
+    pathArray.reduce<string[]>((previousPathArray, currentPathName, currentIndex) => {
+      const nextPathArray = previousPathArray.concat(currentPathName);
       const isLastIndex = currentIndex === pathArrayLength - 1;
       if (isLastIndex) {
-        this.setToRootOrParent(component, currentPath, previousPathArray, nextPathArray);
+        console.log({
+          isLastIndex,
+          currentPathName,
+        });
+        this.setToRootOrParent(component, currentPathName, previousPathArray, nextPathArray);
       } else {
-        this.setToRootOrParent(new Tree(this.treeKind, currentPath), currentPath, previousPathArray, nextPathArray);
+        const tree = new Tree(this.treeKind, currentPathName);
+        console.log({
+          isLastIndex,
+          currentPathName,
+        });
+        this.setToRootOrParent(tree, currentPathName, previousPathArray, nextPathArray);
       }
       return nextPathArray;
     }, []);
@@ -68,5 +77,24 @@ export class Operator<TreeKind extends string> {
         component && component.hasChildren() && this.removeFromRootOrParent(currentPathArray, component);
       }
     }
+  }
+
+  public copy(from: string, to: string, kind: string): boolean {
+    const fromComponent = this.getChildByPaths(from, kind);
+    const toComponent = this.getChildByPaths(to, kind);
+    if (toComponent || !fromComponent) {
+      return false;
+    }
+    this.set(to, fromComponent);
+    return true;
+  }
+
+  public move(from: string, to: string, kind: string): boolean {
+    const success = this.copy(from, to, kind);
+    if (success) {
+      this.remove(from, kind);
+      return true;
+    }
+    return false;
   }
 }

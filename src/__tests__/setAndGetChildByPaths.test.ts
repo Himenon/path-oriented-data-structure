@@ -1,25 +1,32 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type { HierarchicalData } from "../types";
 import { Operator } from "../Operator";
 import { treeKind, StringValueNode, getChildByPaths } from "./sample";
 import { genTestName } from "./tools";
+import { generateKey as gk } from "../Utils";
 
 describe("Extended Node management test", () => {
-  test(genTestName(".", 0), () => {
-    const operator = new Operator(treeKind);
-    const result: HierarchicalData = {
-      name: ".",
-      children: {},
-    };
-    expect(operator.getHierarchy()).toStrictEqual(result);
-  });
   test(genTestName("./a", 1), () => {
     const operator = new Operator(treeKind);
-    const valueNode = new StringValueNode("hoge", "b");
-    operator.set("./a", valueNode);
     const findComponent = getChildByPaths(operator);
+    (() => {
+      const valueNode = new StringValueNode("string-name", "test-data-1");
+      operator.set("./a", valueNode);
+    })();
+
+    const hierarchicalData: HierarchicalData = {
+      name: ".",
+      children: {
+        [gk("string", "a")]: {
+          name: "string-name",
+        },
+      },
+    };
+
+    expect(operator.getHierarchy()).toStrictEqual(hierarchicalData);
     const result = findComponent("./a", "string");
     expect(result).not.toBeUndefined();
-    expect(result).toStrictEqual(valueNode);
-    expect(result!.getValue()).toBe(valueNode.getValue());
+    expect(result!.getHierarchy()).toStrictEqual({ name: "string-name" });
+    expect(result!.getValue()).toBe("test-data-1");
   });
 });
