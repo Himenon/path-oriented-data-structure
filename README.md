@@ -1,4 +1,4 @@
-# @himenon/node-lib-template
+# @himenon/path-oriented-data-structure
 
 Data structure management library that extends Composite Pattern to Path orientation.
 
