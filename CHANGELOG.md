@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.1.3"></a>
+## 0.1.3 (2021-04-01)
+
+**Note:** Version bump only for package @himenon/path-oriented-data-structure
+
+
+
+
+
 <a name="0.1.2"></a>
 ## 0.1.2 (2021-04-01)
 
