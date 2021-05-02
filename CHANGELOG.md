@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.2.0"></a>
+# 0.2.0 (2021-05-02)
+
+
+### Features
+
+* create getChildPaths API ([#8](https://github.com/Himenon/path-oriented-data-structure/issues/8)) ([2bdd19f](https://github.com/Himenon/path-oriented-data-structure/commit/2bdd19f))
+
+
+
+
+
 <a name="0.1.3"></a>
 ## 0.1.3 (2021-04-01)
 
