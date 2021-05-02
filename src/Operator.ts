@@ -1,6 +1,6 @@
-import type { Component, HierarchicalData } from "./types";
+import type { Component, Children, HierarchicalData } from "./types";
 import { Tree } from "./Tree";
-import { split } from "./Utils";
+import { split, splitKey } from "./Utils";
 
 export class Operator<TreeKind extends string> {
   private tree: Tree<TreeKind>;
@@ -92,5 +92,24 @@ export class Operator<TreeKind extends string> {
       return true;
     }
     return false;
+  }
+
+  private getChildPaths(kind: string, children: Children, parentPath: string): string[] {
+    let pathArray: string[] = [];
+    Object.entries(children).forEach(([key, child]) => {
+      const subChildren = child.getChildren();
+      const [, pathName] = splitKey(key);
+      const nextPath = [parentPath, pathName].join(this.delimiter).replace(/\/$/, "");
+      if (subChildren) {
+        pathArray = pathArray.concat(this.getChildPaths(kind, subChildren, nextPath));
+      } else if (child.kind === kind) {
+        pathArray.push(nextPath);
+      }
+    });
+    return pathArray;
+  }
+
+  public getNodePaths(kind: string): string[] {
+    return this.getChildPaths(kind, this.tree.getChildren(), this.tree.name);
   }
 }

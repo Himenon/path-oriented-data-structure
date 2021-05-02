@@ -154,6 +154,8 @@ getChildByPaths("a/b", "number"); // ReturnType: NumberValueNode | undefined
 
 #### `move(from: string, to: string, kind: string): boolean`
 
+#### `getChildPaths(kind: string): string[]`
+
 ## LICENCE
 
 [@himenon/path-oriented-data-structure](https://github.com/Himenon/path-oriented-data-structure)・MIT
