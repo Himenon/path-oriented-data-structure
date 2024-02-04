@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.0.2"></a>
+## 1.0.2 (2024-02-04)
+
+
+### Bug Fixes
+
+* remove private field ([#11](https://github.com/Himenon/path-oriented-data-structure/issues/11)) ([644bc45](https://github.com/Himenon/path-oriented-data-structure/commit/644bc45))
+
+
+
+
+
 <a name="1.0.1"></a>
 ## 1.0.1 (2024-02-04)
 
