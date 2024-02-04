@@ -3,7 +3,10 @@ import { generateKey } from "./Utils";
 
 export class Tree<Kind extends string> implements Component<Kind> {
   private children: Children = {};
-  constructor(public kind: Kind, public name: string) {}
+  constructor(
+    public kind: Kind,
+    public name: string,
+  ) {}
 
   public getChildByPaths(paths: string[], kind: string): Component<string> | undefined {
     const [name, ...pathArray] = paths;

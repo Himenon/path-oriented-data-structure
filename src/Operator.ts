@@ -4,7 +4,10 @@ import { split, splitKey } from "./Utils";
 
 export class Operator<TreeKind extends string> {
   private tree: Tree<TreeKind>;
-  constructor(private treeKind: TreeKind, private delimiter: string = "/") {
+  constructor(
+    private treeKind: TreeKind,
+    private delimiter: string = "/",
+  ) {
     this.tree = new Tree(treeKind, ".");
   }
 

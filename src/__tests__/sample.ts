@@ -1,3 +1,4 @@
+import { expect, test, describe } from "vitest";
 import { Node } from "../Node";
 import { Operator } from "../Operator";
 
@@ -8,7 +9,10 @@ export type KindOfNumber = "number";
 export type Kind = KindOfNumber | KindOfString;
 
 export class StringValueNode extends Node<KindOfString> {
-  constructor(name: string, private value: string) {
+  constructor(
+    name: string,
+    private value: string,
+  ) {
     super("string", name);
   }
   public getValue(): string {
@@ -20,7 +24,10 @@ export class StringValueNode extends Node<KindOfString> {
 }
 
 export class NumberValueNode extends Node<KindOfNumber> {
-  constructor(name: string, private value: number) {
+  constructor(
+    name: string,
+    private value: number,
+  ) {
     super("number", name);
   }
   public getValue(): number {
@@ -30,6 +37,8 @@ export class NumberValueNode extends Node<KindOfNumber> {
 
 export type GetNode<T extends Kind> = T extends KindOfString ? StringValueNode : T extends KindOfNumber ? NumberValueNode : never;
 
-export const getChildByPaths = (operator: Operator<string>) => <T extends Kind>(path: string, kind: T): GetNode<T> | undefined => {
-  return operator.getChildByPaths(path, kind) as GetNode<T> | undefined;
-};
+export const getChildByPaths =
+  (operator: Operator<string>) =>
+  <T extends Kind>(path: string, kind: T): GetNode<T> | undefined => {
+    return operator.getChildByPaths(path, kind) as GetNode<T> | undefined;
+  };

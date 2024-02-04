@@ -61,7 +61,7 @@ module.exports = {
         "from.pathNot re of the not-to-dev-dep rule in the dependency-cruiser configuration",
       from: {
         path: "^(src|app|lib)",
-        pathNot: "\\.spec\\.(js|ts|ls|coffee|litcoffee|coffee\\.md)$",
+        pathNot: ["\\.spec\\.(js|ts|ls|coffee|litcoffee|coffee\\.md)$", "__tests__"],
       },
       to: {
         dependencyTypes: ["npm-dev"],

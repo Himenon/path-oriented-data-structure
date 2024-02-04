@@ -1,7 +1,10 @@
 import type { Component, HierarchicalData } from "./types";
 
 export class Node<Kind extends string> implements Component<Kind> {
-  constructor(public kind: Kind, public name: string) {}
+  constructor(
+    public kind: Kind,
+    public name: string,
+  ) {}
 
   public getChildren(): undefined {
     return undefined;
