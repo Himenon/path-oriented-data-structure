@@ -1,6 +1,6 @@
 {
   "name": "@himenon/path-oriented-data-structure",
-  "version": "0.2.1",
+  "version": "1.0.0",
   "private": true,
   "description": "A composite pattern with a Path-oriented data structure.",
   "keywords": [
@@ -24,6 +24,7 @@
     "url": "https://github.com/Himenon"
   },
   "sideEffects": false,
+  "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
