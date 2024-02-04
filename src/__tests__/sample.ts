@@ -1,3 +1,4 @@
+import { expect, test, describe } from "vitest";
 import { Node } from "../Node";
 import { Operator } from "../Operator";
 

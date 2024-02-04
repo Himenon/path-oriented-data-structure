@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { expect, test, describe } from "vitest";
 import type { HierarchicalData } from "../types";
 import { Operator } from "../Operator";
 import { treeKind, NumberValueNode, StringValueNode, getChildByPaths } from "./sample";

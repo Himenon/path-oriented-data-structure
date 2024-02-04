@@ -1,6 +1,5 @@
+import { expect, test, describe } from "vitest";
 import { Node } from "../Node";
-// import { Tree } from "../Tree";
-// import type { HierarchicalData } from "../types";
 
 describe("Tree", () => {
   test("getChildren", () => {

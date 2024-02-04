@@ -1,3 +1,4 @@
+import { expect, test, describe } from "vitest";
 import { Node } from "../Node";
 import type { HierarchicalData } from "../types";
 import { Operator } from "../Operator";

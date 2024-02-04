@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { expect, test, describe } from "vitest";
 import { Operator } from "../Operator";
 import { genTestName } from "./tools";
 import { getChildByPaths, StringValueNode, treeKind } from "./sample";
