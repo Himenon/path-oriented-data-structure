@@ -42,13 +42,13 @@
 		"clean": "rimraf dist",
 		"lint": "oxlint",
 		"format": "oxfmt",
-		"validate": "pxfmt --check",
+		"validate": "oxfmt --check",
 		"lerna:version:up": "lerna version --yes",
 		"release:github:registry": "pnpm publish --registry https://npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}",
 		"release:npm:registry": "pnpm publish",
 		"test": "run-s test:depcruise test:vitest",
 		"test:depcruise": "depcruise --validate .dependency-cruiser.js src",
-		"test:vitest": "vitest"
+		"test:vitest": "vitest run"
 	},
 	"devDependencies": {
 		"@swc/core": "^1.15.40",
