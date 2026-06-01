@@ -1,84 +1,77 @@
 {
-  "name": "@himenon/path-oriented-data-structure",
-  "version": "1.0.2",
-  "description": "A composite pattern with a Path-oriented data structure.",
-  "keywords": [
-    "path-oriented",
-    "structure",
-    "composite-pattern",
-    "design-pattern"
-  ],
-  "homepage": "https://github.com/Himenon/path-oriented-data-structure#readme",
-  "bugs": {
-    "url": "https://github.com/Himenon/path-oriented-data-structure/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:Himenon/path-oriented-data-structure.git"
-  },
-  "license": "MIT",
-  "author": {
-    "name": "Himenon",
-    "email": "k.himeno314@gmail.com",
-    "url": "https://github.com/Himenon"
-  },
-  "sideEffects": false,
-  "type": "module",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "directories": {
-    "dist": "dist"
-  },
-  "files": [
-    "dist",
-    "package.json"
-  ],
-  "scripts": {
-    "build": "tsup src/*.ts",
-    "clean": "rimraf dist",
-    "format": "biome format --write .",
-    "validate": "biome check --apply .",
-    "lerna:version:up": "lerna version --yes",
-    "release:github:registry": "yarn publish --registry https://npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}",
-    "release:npm:registry": "yarn publish",
-    "test": "run-s test:depcruise test:vitest",
-    "test:depcruise": "depcruise --validate .dependency-cruiser.js src",
-    "test:vitest": "vitest",
-    "ts": "ts-node -P tsconfig.build.json"
-  },
-  "simple-git-hooks": {
-    "pre-commit": "pnpm lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,jsx,json,yml,yaml,html,md,ts,tsx}": [
-      "biome format --no-errors-on-unmatched --write"
-    ]
-  },
-  "devDependencies": {
-    "@biomejs/biome": "^1.5.3",
-    "@swc/core": "^1.3.107",
-    "@types/node": "20.11.16",
-    "@typescript-eslint/eslint-plugin": "6.20.0",
-    "@typescript-eslint/parser": "6.20.0",
-    "conventional-changelog-angular-all": "1.7.0",
-    "cross-env": "^7.0.3",
-    "dependency-cruiser": "^16.1.0",
-    "lerna": "8.0.2",
-    "lint-staged": "15.2.1",
-    "npm-run-all": "4.1.5",
-    "rimraf": "^5.0.5",
-    "simple-git-hooks": "^2.9.0",
-    "ts-node": "^10.9.2",
-    "tsup": "^8.0.1",
-    "typescript": "5.3.3",
-    "vitest": "^1.2.2"
-  },
-  "engines": {
-    "node": ">=20",
-    "pnpm": ">=8"
-  },
-  "publishConfig": {
-    "access": "public"
-  }
+	"name": "@himenon/path-oriented-data-structure",
+	"version": "2.0.0",
+	"description": "A composite pattern with a Path-oriented data structure.",
+	"keywords": [
+		"composite-pattern",
+		"design-pattern",
+		"path-oriented",
+		"structure"
+	],
+	"homepage": "https://github.com/Himenon/path-oriented-data-structure#readme",
+	"bugs": {
+		"url": "https://github.com/Himenon/path-oriented-data-structure/issues"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Himenon",
+		"email": "k.himeno314@gmail.com",
+		"url": "https://github.com/Himenon"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:Himenon/path-oriented-data-structure.git"
+	},
+	"directories": {
+		"dist": "dist"
+	},
+	"files": [
+		"dist",
+		"package.json"
+	],
+	"type": "module",
+	"sideEffects": false,
+	"main": "dist/index.js",
+	"module": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"publishConfig": {
+		"access": "public"
+	},
+	"scripts": {
+		"build": "tsup src/*.ts",
+		"clean": "rimraf dist",
+		"lint": "oxlint",
+		"format": "oxfmt",
+		"validate": "oxfmt --check",
+		"lerna:version:up": "lerna version --yes",
+		"release:github:registry": "pnpm publish --registry https://npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}",
+		"release:npm:registry": "pnpm publish",
+		"test": "run-s test:depcruise test:vitest",
+		"test:depcruise": "depcruise --validate .dependency-cruiser.js src",
+		"test:vitest": "vitest run"
+	},
+	"devDependencies": {
+		"@swc/core": "^1.15.40",
+		"@types/node": "25.9.1",
+		"@typescript-eslint/eslint-plugin": "8.59.4",
+		"@typescript-eslint/parser": "8.59.4",
+		"conventional-changelog-angular-all": "1.7.0",
+		"cross-env": "^10.1.0",
+		"dependency-cruiser": "^17.4.2",
+		"lefthook": "2.1.8",
+		"lerna": "9.0.7",
+		"npm-run-all": "4.1.5",
+		"oxfmt": "0.51.0",
+		"oxlint": "1.66.0",
+		"oxlint-tsgolint": "0.23.0",
+		"rimraf": "^6.1.3",
+		"ts-node": "^10.9.2",
+		"tsup": "^8.5.1",
+		"typescript": "6.0.3",
+		"vitest": "^4.1.7"
+	},
+	"engines": {
+		"node": ">=24.0.0"
+	},
+	"packageManager": "pnpm@11.3.0"
 }
