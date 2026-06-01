@@ -105,7 +105,7 @@ module.exports = {
       dependencyTypes: ["npm", "npm-dev", "npm-optional", "npm-peer", "npm-bundled", "npm-no-pkg"],
     },
 
-    /* conditions specifying which dependencies to exclude 
+    /* conditions specifying which dependencies to exclude
            - path: a regular expression to match
            - dynamic: a boolean indicating whether to ignore dynamic (true) or static (false) dependencies.
                     leave out if you want to exclude neither (recommended!)
@@ -115,7 +115,7 @@ module.exports = {
     //   , dynamic: true
     // }
 
-    /* pattern specifying which files to include (regular expression) 
+    /* pattern specifying which files to include (regular expression)
            dependency-cruiser will skip everything not matching this pattern
         */
     // , includeOnly : ''
