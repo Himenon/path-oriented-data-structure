@@ -93,7 +93,18 @@
 		"unicorn/no-array-reduce": "warn",
 		"unicorn/prefer-spread": "warn",
 		"unicorn/prefer-array-some": "warn",
-		"prefer-readonly-parameter-types": "off"
+		"prefer-readonly-parameter-types": "off",
+		"eslint/class-methods-use-this": "warn",
+		"eslint/no-useless-return": "warn",
+		"eslint/arrow-body-style": "warn",
+		"eslint/no-plusplus": "warn",
+		"eslint/no-unused-expressions": "warn",
+		"eslint/require-unicode-regexp": "warn",
+		"typescript/consistent-indexed-object-style": "warn",
+		"typescript/no-unnecessary-type-arguments": "warn",
+		"typescript/consistent-return": "warn",
+		"unicorn/prefer-string-raw": "warn",
+		"unicorn/prefer-negative-index": "warn"
 	},
 	"env": {
 		"builtin": true
