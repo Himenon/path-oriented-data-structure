@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.0.1"></a>
+## 2.0.1 (2026-06-01)
+
+
+### Chores
+
+* update dependencies & require nodejs >= v24 ([#12](https://github.com/Himenon/path-oriented-data-structure/issues/12)) ([b4f9d37](https://github.com/Himenon/path-oriented-data-structure/commit/b4f9d37))
+
+
+
+
+
 <a name="1.0.2"></a>
 
 ## 1.0.2 (2024-02-04)
